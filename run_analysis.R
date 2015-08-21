@@ -71,8 +71,9 @@ ExtractMeanAndStd <- function(input.data = NULL){
   mean.data       <- input.data[, mean.index]
   std.data        <- input.data[, std.index]
   activities.data <- input.data$activity_label_id
+  subjects.data   <- input.data$subject_id
 
-  extracted.data <- cbind(mean.data, std.data, activity_label_id=activities.data)
+  extracted.data <- cbind(mean.data, std.data, activity_label_id=activities.data, subject_id=subjects.data)
 }
 
 AddActivityLabels <- function(input.data = null, file.path=''){
@@ -104,7 +105,8 @@ Serket.run <- function() {
 
   merged.data <- AddActivityLabels(extracted.data, paste(DATA_DIR, 'activity_labels.txt', sep='/'))
 
-  print(dim(merged.data))
+  #print(dim(merged.data))
+  write.table(merged.data, '/tmp/step4.csv', sep=',', row.names=FALSE)
 
 }
 
