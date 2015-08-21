@@ -26,7 +26,7 @@ LoadData <- function() {
               x.test=XT, subject.test=ST, y.test=YT))
 }
 
-MergeData <- function(raw.data = NULL){
+ClipData <- function(raw.data = NULL){
   x.train       <- raw.data$x.train
   subject.train <- raw.data$subject.train
   y.train       <- raw.data$y.train
@@ -92,10 +92,12 @@ AddActivityLabels <- function(input.data = null, file.path=''){
 }
 
 
+
+
 Serket.run <- function() {
   raw.data <- LoadData()
 
-  dataset.baseline <- MergeData(raw.data)
+  dataset.baseline <- ClipData(raw.data)
 
   print( dim(dataset.baseline) )
 
