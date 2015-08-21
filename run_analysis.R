@@ -70,13 +70,16 @@ ExtractMeanAndStd <- function(input.data = NULL){
 
   mean.data       <- input.data[, mean.index]
   std.data        <- input.data[, std.index]
+
+  # Activity and Subject data is added with the purpose of keep consistency
+  # through the whole process even though it's required only mean and std data.
   activities.data <- input.data$activity_label_id
   subjects.data   <- input.data$subject_id
 
   extracted.data <- cbind(mean.data, std.data, activity_label_id=activities.data, subject_id=subjects.data)
 }
 
-AddActivityLabels <- function(input.data = null, file.path=''){
+ActivityLabels <- function(file.path=''){
   if(!file.exists(file.path)){
     print("Please provide an existing file path for activity labels")
     stop()
@@ -85,31 +88,29 @@ AddActivityLabels <- function(input.data = null, file.path=''){
   activity.labels <- read.table(file.path)
   names(activity.labels) <- c('activity_label_id', 'activity_label')
 
-  merge.data <- merge(input.data, activity.labels, by.x="activity_label_id", by.y="activity_label_id", sort=FALSE)
-
-  return(merge.data)
-
+  return(activity.labels)
 }
 
+MergeData <- function(input.data = NULL, activity.data = NULL){
+  merge.data <- merge(input.data, activity.data, by.x="activity_label_id", by.y="activity_label_id", sort=FALSE)
 
-
+  return(merge.data)
+}
 
 Serket.run <- function() {
+  
+  # Step 1
   raw.data <- LoadData()
-
   dataset.baseline <- ClipData(raw.data)
 
-  print( dim(dataset.baseline) )
-
+  # Step 2
   extracted.data <- ExtractMeanAndStd(dataset.baseline)
 
-  print(dim(extracted.data))
+  # Step 3
+  activity.data <- ActivityLabels(paste(DATA_DIR, 'activity_labels.txt', sep='/'))
+  merged.data <- MergeData(input.data=extracted.data, activity.data=activity.data)
 
-  merged.data <- AddActivityLabels(extracted.data, paste(DATA_DIR, 'activity_labels.txt', sep='/'))
-
-  #print(dim(merged.data))
   write.table(merged.data, '/tmp/step4.csv', sep=',', row.names=FALSE)
-
 }
 
 Serket.run()
