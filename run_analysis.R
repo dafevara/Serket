@@ -35,24 +35,77 @@ MergeData <- function(raw.data = NULL){
   subject.test  <- raw.data$subject.test
   y.test        <- raw.data$y.test
 
-  names(subject.train) <- c("subject_id")
-  names(subject.test) <- c("subject_id")
+  names(subject.train)  <- c("subject_id")
+  names(subject.test)   <- c("subject_id")
+  names(y.train)        <- c("activity_label_id")
+  names(y.test)         <- c("activity_label_id")
 
-  full.train <- cbind(x.train, subject.train, y.train)
-  full.test <- cbind(x.test, subject.test, y.test)
+  full.train <- cbind(x.train, subject.train)
+  full.test <- cbind(x.test, subject.test)
 
-  FD <- rbind(full.train, full.test)
+  dataset.baseline <- rbind(full.train, full.test)
 
-  return(FD)
+  y.data <- rbind(y.train, y.test)
+
+  dataset.baseline <- cbind(dataset.baseline, y.data)
+
+  return(dataset.baseline)
+}
+
+FeaturesIndex <- function(feature.pattern = '', file.path = ''){
+  if(!file.exists(file.path)){
+    print("Please provide an existing feature files path")
+    stop()
+  }
+
+  file.data <- read.table(file.path)
+  measure.index <- grep(feature.pattern, file.data$V2, ignore.case=FALSE, value=FALSE)
+
+  return(measure.index)
+}
+
+ExtractMeanAndStd <- function(input.data = NULL){
+  mean.index  <- FeaturesIndex('mean', paste(DATA_DIR, 'features.txt', sep='/'))
+  std.index   <- FeaturesIndex('std', paste(DATA_DIR, 'features.txt', sep='/'))
+
+  mean.data       <- input.data[, mean.index]
+  std.data        <- input.data[, std.index]
+  activities.data <- input.data$activity_label_id
+
+  extracted.data <- cbind(mean.data, std.data, activity_label_id=activities.data)
+}
+
+AddActivityLabels <- function(input.data = null, file.path=''){
+  if(!file.exists(file.path)){
+    print("Please provide an existing file path for activity labels")
+    stop()
+  }
+
+  activity.labels <- read.table(file.path)
+  names(activity.labels) <- c('activity_label_id', 'activity_label')
+
+  merge.data <- merge(input.data, activity.labels, by.x="activity_label_id", by.y="activity_label_id", sort=FALSE)
+
+  return(merge.data)
+
 }
 
 
 Serket.run <- function() {
   raw.data <- LoadData()
 
-  FD <- MergeData(raw.data)
+  dataset.baseline <- MergeData(raw.data)
 
-  print( dim(FD) )
+  print( dim(dataset.baseline) )
+
+  extracted.data <- ExtractMeanAndStd(dataset.baseline)
+
+  print(dim(extracted.data))
+
+  merged.data <- AddActivityLabels(extracted.data, paste(DATA_DIR, 'activity_labels.txt', sep='/'))
+
+  print(dim(merged.data))
+
 }
 
 Serket.run()
