@@ -97,20 +97,76 @@ MergeData <- function(input.data = NULL, activity.data = NULL){
   return(merge.data)
 }
 
+AddSelfExplainNames <- function(dataset, featurelist.path){
+  dataset.names <- names(dataset)
+
+  if(!file.exists(featurelist.path)){
+    print("Please provide an existing file path for features list")
+    stop()
+  }
+
+  features <- read.table(featurelist.path)
+  raw.colnames <- dataset.names[!dataset.names %in% c("activity_label_id", 'activity_label', 'subject_id')]
+  target.names <- gsub("V", "", raw.colnames)
+
+  raw.feat.names <- features[as.numeric(target.names), ]
+  raw.feat.names$V2 <- sapply(raw.feat.names$V2, FUN=GenerateHumanReadableName)
+
+ for(x in raw.feat.names$V1){ 
+    position <- match(paste("V", x, sep=''), dataset.names)
+    new.name <- raw.feat.names[raw.feat.names$V1 == x,]$V2
+    #num.row <- as.numeric(sub("V", '', x))
+
+    names(dataset)[position] <- new.name
+  }
+
+  return(dataset)
+}
+
+
+GenerateHumanReadableName <- function(not.readable = NULL){
+
+  tokens <- list(
+                "Body" = "Body",
+                "Acc" = "Acceleration",
+                "Gyro" = "Gyroscope",
+                "Jerk" = "Jerk",
+                "mean()" = "Mean",
+                "std()" = "StandardDeviation",
+                "meanFreq()" = "MeanFrequency",
+                "Mag" = "Magnitude",
+                "-" = '',
+                "-X" = "AtXAxis",
+                "-Y" = "AtYAxis",
+                "-Z" = "AtZAxis",
+                "BodyBody" = "Body"
+             )
+
+  for(token in names(tokens)){
+    not.readable <- sub(token, tokens[token], not.readable, fixed=TRUE, ignore.case=FALSE)
+  }
+  return(not.readable)
+
+}
+
 Serket.run <- function() {
   
   # Step 1
-  raw.data <- LoadData()
-  dataset.baseline <- ClipData(raw.data)
+  #raw.data <- LoadData()
+  #dataset.baseline <- ClipData(raw.data)
 
-  # Step 2
-  extracted.data <- ExtractMeanAndStd(dataset.baseline)
+  ## Step 2
+  #extracted.data <- ExtractMeanAndStd(dataset.baseline)
 
-  # Step 3
-  activity.data <- ActivityLabels(paste(DATA_DIR, 'activity_labels.txt', sep='/'))
-  merged.data <- MergeData(input.data=extracted.data, activity.data=activity.data)
+  ## Step 3
+  #activity.data <- ActivityLabels(paste(DATA_DIR, 'activity_labels.txt', sep='/'))
+  #merged.data <- MergeData(input.data=extracted.data, activity.data=activity.data)
 
-  write.table(merged.data, '/tmp/step4.csv', sep=',', row.names=FALSE)
+  ##write.table(merged.data, '/tmp/step4.csv', sep=',', row.names=FALSE)
+  prebuild <- read.csv('/tmp/step4.csv', sep=',')
+  result <- AddSelfExplainNames(prebuild, paste(DATA_DIR, 'features.txt', sep='/'))
+
+  return(result)
 }
 
 Serket.run()
