@@ -1,3 +1,5 @@
+library(plyr)
+
 DATA_DIR <- "./UCI\ HAR\ Dataset"
 
 LoadData <- function() {
@@ -35,10 +37,10 @@ ClipData <- function(raw.data = NULL){
   subject.test  <- raw.data$subject.test
   y.test        <- raw.data$y.test
 
-  names(subject.train)  <- c("subject_id")
-  names(subject.test)   <- c("subject_id")
-  names(y.train)        <- c("activity_label_id")
-  names(y.test)         <- c("activity_label_id")
+  names(subject.train)  <- c("SubjectId")
+  names(subject.test)   <- c("SubjectId")
+  names(y.train)        <- c("ActivityLabelId")
+  names(y.test)         <- c("ActivityLabelId")
 
   full.train <- cbind(x.train, subject.train)
   full.test <- cbind(x.test, subject.test)
@@ -73,10 +75,10 @@ ExtractMeanAndStd <- function(input.data = NULL){
 
   # Activity and Subject data is added with the purpose of keep consistency
   # through the whole process even though it's required only mean and std data.
-  activities.data <- input.data$activity_label_id
-  subjects.data   <- input.data$subject_id
+  activities.data <- input.data$ActivityLabelId
+  subjects.data   <- input.data$SubjectId
 
-  extracted.data <- cbind(mean.data, std.data, activity_label_id=activities.data, subject_id=subjects.data)
+  extracted.data <- cbind(mean.data, std.data, ActivityLabelId=activities.data, SubjectId=subjects.data)
 }
 
 ActivityLabels <- function(file.path=''){
@@ -86,13 +88,13 @@ ActivityLabels <- function(file.path=''){
   }
 
   activity.labels <- read.table(file.path)
-  names(activity.labels) <- c('activity_label_id', 'activity_label')
+  names(activity.labels) <- c('ActivityLabelId', 'ActivityLabel')
 
   return(activity.labels)
 }
 
 MergeData <- function(input.data = NULL, activity.data = NULL){
-  merge.data <- merge(input.data, activity.data, by.x="activity_label_id", by.y="activity_label_id", sort=FALSE)
+  merge.data <- merge(input.data, activity.data, by.x="ActivityLabelId", by.y="ActivityLabelId", sort=FALSE)
 
   return(merge.data)
 }
@@ -106,7 +108,7 @@ AddSelfExplainNames <- function(dataset, featurelist.path){
   }
 
   features <- read.table(featurelist.path)
-  raw.colnames <- dataset.names[!dataset.names %in% c("activity_label_id", 'activity_label', 'subject_id')]
+  raw.colnames <- dataset.names[!dataset.names %in% c("ActivityLabelId", 'ActivityLabel', 'SubjectId')]
   target.names <- gsub("V", "", raw.colnames)
 
   raw.feat.names <- features[as.numeric(target.names), ]
@@ -139,12 +141,29 @@ GenerateHumanReadableName <- function(not.readable = NULL){
                 "-X" = "AtXAxis",
                 "-Y" = "AtYAxis",
                 "-Z" = "AtZAxis",
-                "BodyBody" = "Body"
+                "BodyBody" = "Body",
+                "FrecuencyFrecuency" = "Frecuency"
              )
+
+  measure.key <- substr(not.readable, 0,1)
+  not.readable <- toString(not.readable)
+  
+  if( measure.key %in% c('t', 'f')){
+    not.readable <- substr(not.readable, 2, nchar(not.readable))
+
+    if (measure.key == 't'){
+      not.readable <- paste(not.readable, "Time", sep='')
+    }
+
+    if (measure.key == 'f') {
+      not.readable <- paste(not.readable, "Frecuency", sep='')
+    }
+  }
 
   for(token in names(tokens)){
     not.readable <- sub(token, tokens[token], not.readable, fixed=TRUE, ignore.case=FALSE)
   }
+
   return(not.readable)
 
 }
@@ -166,7 +185,10 @@ Serket.run <- function() {
   prebuild <- read.csv('/tmp/step4.csv', sep=',')
   result <- AddSelfExplainNames(prebuild, paste(DATA_DIR, 'features.txt', sep='/'))
 
-  return(result)
+  result <- arrange(result, SubjectId, ActivityLabelId)
+  write.table(result, '/tmp/step5.csv', sep=',', row.names=FALSE)
+
+  return(c(0))
 }
 
 Serket.run()
