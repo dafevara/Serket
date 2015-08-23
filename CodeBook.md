@@ -100,88 +100,86 @@ Rows: 180, Cols: 82
 
 ## Dataset Description
 
-180 obs. of  82 variables:
-  - SubjectId                                              : int 1:30
-  - ActivityLabelId                                        : int  1 2 3 4 5 6
-  - ActivityLabel                                          : Factor w/ 6
-      levels WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING ,STANDING, LAYING
-
- - BodyAccelerationMeanAtXAxisTime                         : Float, Average, Unit: Seconds
- - BodyAccelerationMeanAtYAxisTime                         : Float, Average, Unit: Seconds
- - BodyAccelerationMeanAtZAxisTime                         : Float, Average, Unit: Seconds
- - GravityAccelerationMeanAtXAxisTime                      : Float, Average, Unit: Seconds
- - GravityAccelerationMeanAtYAxisTime                      : Float, Average, Unit: Seconds
- - GravityAccelerationMeanAtZAxisTime                      : Float, Average, Unit: Seconds
- - BodyAccelerationJerkMeanAtXAxisTime                     : Float, Average, Unit: Seconds
- - BodyAccelerationJerkMeanAtYAxisTime                     : Float, Average, Unit: Seconds
- - BodyAccelerationJerkMeanAtZAxisTime                     : Float, Average, Unit: Seconds
- - BodyGyroscopeMeanAtXAxisTime                            : Float, Average, Unit: Seconds
- - BodyGyroscopeMeanAtYAxisTime                            : Float, Average, Unit: Seconds
- - BodyGyroscopeMeanAtZAxisTime                            : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkMeanAtXAxisTime                        : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkMeanAtYAxisTime                        : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkMeanAtZAxisTime                        : Float, Average, Unit: Seconds
- - BodyAccelerationMagnitudeMeanTime                       : Float, Average, Unit: Seconds
- - GravityAccelerationMagnitudeMeanTime                    : Float, Average, Unit: Seconds
- - BodyAccelerationJerkMagnitudeMeanTime                   : Float, Average, Unit: Seconds
- - BodyGyroscopeMagnitudeMeanTime                          : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkMagnitudeMeanTime                      : Float, Average, Unit: Seconds
- - BodyAccelerationMeanAtXAxisFrequency                    : Float, Average, Unit: Hz
- - BodyAccelerationMeanAtYAxisFrequency                    : Float, Average, Unit: Hz
- - BodyAccelerationMeanAtZAxisFrequency                    : Float, Average, Unit: Hz
- - BodyAccelerationMeanFreqAtXAxisFrequency                : Float, Average, Unit: Hz
- - BodyAccelerationMeanFreqAtYAxisFrequency                : Float, Average, Unit: Hz
- - BodyAccelerationMeanFreqAtZAxisFrequency                : Float, Average, Unit: Hz
- - BodyAccelerationJerkMeanAtXAxisFrequency                : Float, Average, Unit: Hz
- - BodyAccelerationJerkMeanAtYAxisFrequency                : Float, Average, Unit: Hz
- - BodyAccelerationJerkMeanAtZAxisFrequency                : Float, Average, Unit: Hz
- - BodyAccelerationJerkMeanFreqAtXAxisFrequency            : Float, Average, Unit: Hz
- - BodyAccelerationJerkMeanFreqAtYAxisFrequency            : Float, Average, Unit: Hz
- - BodyAccelerationJerkMeanFreqAtZAxisFrequency            : Float, Average, Unit: Hz
- - BodyGyroscopeMeanAtXAxisFrequency                       : Float, Average, Unit: Hz
- - BodyGyroscopeMeanAtYAxisFrequency                       : Float, Average, Unit: Hz
- - BodyGyroscopeMeanAtZAxisFrequency                       : Float, Average, Unit: Hz
- - BodyGyroscopeMeanFreqAtXAxisFrequency                   : Float, Average, Unit: Hz
- - BodyGyroscopeMeanFreqAtYAxisFrequency                   : Float, Average, Unit: Hz
- - BodyGyroscopeMeanFreqAtZAxisFrequency                   : Float, Average, Unit: Hz
- - BodyAccelerationMagnitudeMeanFrequency                  : Float, Average, Unit: Hz
- - BodyAccelerationMagnitudeMeanFreqFrequency              : Float, Average, Unit: Hz
- - BodyAccelerationJerkMagnitudeMeanFrequency              : Float, Average, Unit: Hz
- - BodyAccelerationJerkMagnitudeMeanFreqFrequency          : Float, Average, Unit: Hz
- - BodyGyroscopeMagnitudeMeanFrequency                     : Float, Average, Unit: Hz
- - BodyGyroscopeMagnitudeMeanFreqFrequency                 : Float, Average, Unit: Hz
- - BodyGyroscopeJerkMagnitudeMeanFrequency                 : Float, Average, Unit: Hz
- - BodyGyroscopeJerkMagnitudeMeanFreqFrequency             : Float, Average, Unit: Hz
- - BodyAccelerationStandardDeviationAtXAxisTime            : Float, Average, Unit: Seconds
- - BodyAccelerationStandardDeviationAtYAxisTime            : Float, Average, Unit: Seconds
- - BodyAccelerationStandardDeviationAtZAxisTime            : Float, Average, Unit: Seconds
- - GravityAccelerationStandardDeviationAtXAxisTime         : Float, Average, Unit: Seconds
- - GravityAccelerationStandardDeviationAtYAxisTime         : Float, Average, Unit: Seconds
- - GravityAccelerationStandardDeviationAtZAxisTime         : Float, Average, Unit: Seconds
- - BodyAccelerationJerkStandardDeviationAtXAxisTime        : Float, Average, Unit: Seconds
- - BodyAccelerationJerkStandardDeviationAtYAxisTime        : Float, Average, Unit: Seconds
- - BodyAccelerationJerkStandardDeviationAtZAxisTime        : Float, Average, Unit: Seconds
- - BodyGyroscopeStandardDeviationAtXAxisTime               : Float, Average, Unit: Seconds
- - BodyGyroscopeStandardDeviationAtYAxisTime               : Float, Average, Unit: Seconds
- - BodyGyroscopeStandardDeviationAtZAxisTime               : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkStandardDeviationAtXAxisTime           : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkStandardDeviationAtYAxisTime           : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkStandardDeviationAtZAxisTime           : Float, Average, Unit: Seconds
- - BodyAccelerationMagnitudeStandardDeviationTime          : Float, Average, Unit: Seconds
- - GravityAccelerationMagnitudeStandardDeviationTime       : Float, Average, Unit: Seconds
- - BodyAccelerationJerkMagnitudeStandardDeviationTime      : Float, Average, Unit: Seconds
- - BodyGyroscopeMagnitudeStandardDeviationTime             : Float, Average, Unit: Seconds
- - BodyGyroscopeJerkMagnitudeStandardDeviationTime         : Float, Average, Unit: Seconds
- - BodyAccelerationStandardDeviationAtXAxisFrequency       : Float, Average, Unit: Hz
- - BodyAccelerationStandardDeviationAtYAxisFrequency       : Float, Average, Unit: Hz
- - BodyAccelerationStandardDeviationAtZAxisFrequency       : Float, Average, Unit: Hz
- - BodyAccelerationJerkStandardDeviationAtXAxisFrequency   : Float, Average, Unit: Hz
- - BodyAccelerationJerkStandardDeviationAtYAxisFrequency   : Float, Average, Unit: Hz
- - BodyAccelerationJerkStandardDeviationAtZAxisFrequency   : Float, Average, Unit: Hz
- - BodyGyroscopeStandardDeviationAtXAxisFrequency          : Float, Average, Unit: Hz
- - BodyGyroscopeStandardDeviationAtYAxisFrequency          : Float, Average, Unit: Hz
- - BodyGyroscopeStandardDeviationAtZAxisFrequency          : Float, Average, Unit: Hz
- - BodyAccelerationMagnitudeStandardDeviationFrequency     : Float, Average, Unit: Hz
- - BodyAccelerationJerkMagnitudeStandardDeviationFrequency : Float, Average, Unit: Hz
- - BodyGyroscopeMagnitudeStandardDeviationFrequency        : Float, Average, Unit: Hz
- - BodyGyroscopeJerkMagnitudeStandardDeviationFrequency    : Float, Average, Unit: Hz
+Data Frame: 180 obs. of  82 variables:
+ - SubjectId                                              : int 1:30
+ - ActivityLabelId                                        : int  1 2 3 4 5 6
+ - ActivityLabel                                          : Factor w/ 6 levels WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING ,STANDING, LAYING
+- BodyAccelerationMeanAtXAxisTime                         : Float, Average, Unit: Seconds
+- BodyAccelerationMeanAtYAxisTime                         : Float, Average, Unit: Seconds
+- BodyAccelerationMeanAtZAxisTime                         : Float, Average, Unit: Seconds
+- GravityAccelerationMeanAtXAxisTime                      : Float, Average, Unit: Seconds
+- GravityAccelerationMeanAtYAxisTime                      : Float, Average, Unit: Seconds
+- GravityAccelerationMeanAtZAxisTime                      : Float, Average, Unit: Seconds
+- BodyAccelerationJerkMeanAtXAxisTime                     : Float, Average, Unit: Seconds
+- BodyAccelerationJerkMeanAtYAxisTime                     : Float, Average, Unit: Seconds
+- BodyAccelerationJerkMeanAtZAxisTime                     : Float, Average, Unit: Seconds
+- BodyGyroscopeMeanAtXAxisTime                            : Float, Average, Unit: Seconds
+- BodyGyroscopeMeanAtYAxisTime                            : Float, Average, Unit: Seconds
+- BodyGyroscopeMeanAtZAxisTime                            : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkMeanAtXAxisTime                        : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkMeanAtYAxisTime                        : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkMeanAtZAxisTime                        : Float, Average, Unit: Seconds
+- BodyAccelerationMagnitudeMeanTime                       : Float, Average, Unit: Seconds
+- GravityAccelerationMagnitudeMeanTime                    : Float, Average, Unit: Seconds
+- BodyAccelerationJerkMagnitudeMeanTime                   : Float, Average, Unit: Seconds
+- BodyGyroscopeMagnitudeMeanTime                          : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkMagnitudeMeanTime                      : Float, Average, Unit: Seconds
+- BodyAccelerationMeanAtXAxisFrequency                    : Float, Average, Unit: Hz
+- BodyAccelerationMeanAtYAxisFrequency                    : Float, Average, Unit: Hz
+- BodyAccelerationMeanAtZAxisFrequency                    : Float, Average, Unit: Hz
+- BodyAccelerationMeanFreqAtXAxisFrequency                : Float, Average, Unit: Hz
+- BodyAccelerationMeanFreqAtYAxisFrequency                : Float, Average, Unit: Hz
+- BodyAccelerationMeanFreqAtZAxisFrequency                : Float, Average, Unit: Hz
+- BodyAccelerationJerkMeanAtXAxisFrequency                : Float, Average, Unit: Hz
+- BodyAccelerationJerkMeanAtYAxisFrequency                : Float, Average, Unit: Hz
+- BodyAccelerationJerkMeanAtZAxisFrequency                : Float, Average, Unit: Hz
+- BodyAccelerationJerkMeanFreqAtXAxisFrequency            : Float, Average, Unit: Hz
+- BodyAccelerationJerkMeanFreqAtYAxisFrequency            : Float, Average, Unit: Hz
+- BodyAccelerationJerkMeanFreqAtZAxisFrequency            : Float, Average, Unit: Hz
+- BodyGyroscopeMeanAtXAxisFrequency                       : Float, Average, Unit: Hz
+- BodyGyroscopeMeanAtYAxisFrequency                       : Float, Average, Unit: Hz
+- BodyGyroscopeMeanAtZAxisFrequency                       : Float, Average, Unit: Hz
+- BodyGyroscopeMeanFreqAtXAxisFrequency                   : Float, Average, Unit: Hz
+- BodyGyroscopeMeanFreqAtYAxisFrequency                   : Float, Average, Unit: Hz
+- BodyGyroscopeMeanFreqAtZAxisFrequency                   : Float, Average, Unit: Hz
+- BodyAccelerationMagnitudeMeanFrequency                  : Float, Average, Unit: Hz
+- BodyAccelerationMagnitudeMeanFreqFrequency              : Float, Average, Unit: Hz
+- BodyAccelerationJerkMagnitudeMeanFrequency              : Float, Average, Unit: Hz
+- BodyAccelerationJerkMagnitudeMeanFreqFrequency          : Float, Average, Unit: Hz
+- BodyGyroscopeMagnitudeMeanFrequency                     : Float, Average, Unit: Hz
+- BodyGyroscopeMagnitudeMeanFreqFrequency                 : Float, Average, Unit: Hz
+- BodyGyroscopeJerkMagnitudeMeanFrequency                 : Float, Average, Unit: Hz
+- BodyGyroscopeJerkMagnitudeMeanFreqFrequency             : Float, Average, Unit: Hz
+- BodyAccelerationStandardDeviationAtXAxisTime            : Float, Average, Unit: Seconds
+- BodyAccelerationStandardDeviationAtYAxisTime            : Float, Average, Unit: Seconds
+- BodyAccelerationStandardDeviationAtZAxisTime            : Float, Average, Unit: Seconds
+- GravityAccelerationStandardDeviationAtXAxisTime         : Float, Average, Unit: Seconds
+- GravityAccelerationStandardDeviationAtYAxisTime         : Float, Average, Unit: Seconds
+- GravityAccelerationStandardDeviationAtZAxisTime         : Float, Average, Unit: Seconds
+- BodyAccelerationJerkStandardDeviationAtXAxisTime        : Float, Average, Unit: Seconds
+- BodyAccelerationJerkStandardDeviationAtYAxisTime        : Float, Average, Unit: Seconds
+- BodyAccelerationJerkStandardDeviationAtZAxisTime        : Float, Average, Unit: Seconds
+- BodyGyroscopeStandardDeviationAtXAxisTime               : Float, Average, Unit: Seconds
+- BodyGyroscopeStandardDeviationAtYAxisTime               : Float, Average, Unit: Seconds
+- BodyGyroscopeStandardDeviationAtZAxisTime               : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkStandardDeviationAtXAxisTime           : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkStandardDeviationAtYAxisTime           : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkStandardDeviationAtZAxisTime           : Float, Average, Unit: Seconds
+- BodyAccelerationMagnitudeStandardDeviationTime          : Float, Average, Unit: Seconds
+- GravityAccelerationMagnitudeStandardDeviationTime       : Float, Average, Unit: Seconds
+- BodyAccelerationJerkMagnitudeStandardDeviationTime      : Float, Average, Unit: Seconds
+- BodyGyroscopeMagnitudeStandardDeviationTime             : Float, Average, Unit: Seconds
+- BodyGyroscopeJerkMagnitudeStandardDeviationTime         : Float, Average, Unit: Seconds
+- BodyAccelerationStandardDeviationAtXAxisFrequency       : Float, Average, Unit: Hz
+- BodyAccelerationStandardDeviationAtYAxisFrequency       : Float, Average, Unit: Hz
+- BodyAccelerationStandardDeviationAtZAxisFrequency       : Float, Average, Unit: Hz
+- BodyAccelerationJerkStandardDeviationAtXAxisFrequency   : Float, Average, Unit: Hz
+- BodyAccelerationJerkStandardDeviationAtYAxisFrequency   : Float, Average, Unit: Hz
+- BodyAccelerationJerkStandardDeviationAtZAxisFrequency   : Float, Average, Unit: Hz
+- BodyGyroscopeStandardDeviationAtXAxisFrequency          : Float, Average, Unit: Hz
+- BodyGyroscopeStandardDeviationAtYAxisFrequency          : Float, Average, Unit: Hz
+- BodyGyroscopeStandardDeviationAtZAxisFrequency          : Float, Average, Unit: Hz
+- BodyAccelerationMagnitudeStandardDeviationFrequency     : Float, Average, Unit: Hz
+- BodyAccelerationJerkMagnitudeStandardDeviationFrequency : Float, Average, Unit: Hz
+- BodyGyroscopeMagnitudeStandardDeviationFrequency        : Float, Average, Unit: Hz
+- BodyGyroscopeJerkMagnitudeStandardDeviationFrequency    : Float, Average, Unit: Hz
