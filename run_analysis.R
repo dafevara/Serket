@@ -1,4 +1,4 @@
-library(plyr)
+library(dplyr)
 
 DATA_DIR <- "./UCI\ HAR\ Dataset"
 
@@ -122,6 +122,9 @@ AddSelfExplainNames <- function(dataset, featurelist.path){
     names(dataset)[position] <- new.name
   }
 
+  #Arrange in favor of readability
+  dataset <- arrange(dataset, SubjectId, ActivityLabelId)
+
   return(dataset)
 }
 
@@ -168,25 +171,34 @@ GenerateHumanReadableName <- function(not.readable = NULL){
 
 }
 
+CreateSummarized <- function(input.data = NULL){
+  group.input.data <- group_by(input.data, SubjectId, ActivityLabelId, ActivityLabel)
+  summ.data <- summarise_each(group.input.data, funs(mean))
+
+  return(summ.data)
+}
+
 Serket.run <- function() {
   
   # Step 1
-  #raw.data <- LoadData()
-  #dataset.baseline <- ClipData(raw.data)
+  raw.data <- LoadData()
+  dataset.baseline <- ClipData(raw.data)
 
   ## Step 2
-  #extracted.data <- ExtractMeanAndStd(dataset.baseline)
+  extracted.data <- ExtractMeanAndStd(dataset.baseline)
 
   ## Step 3
-  #activity.data <- ActivityLabels(paste(DATA_DIR, 'activity_labels.txt', sep='/'))
-  #merged.data <- MergeData(input.data=extracted.data, activity.data=activity.data)
+  activity.data <- ActivityLabels(paste(DATA_DIR, 'activity_labels.txt', sep='/'))
+  merged.data <- MergeData(input.data=extracted.data, activity.data=activity.data)
 
   ##write.table(merged.data, '/tmp/step4.csv', sep=',', row.names=FALSE)
-  prebuild <- read.csv('/tmp/step4.csv', sep=',')
-  result <- AddSelfExplainNames(prebuild, paste(DATA_DIR, 'features.txt', sep='/'))
+  #prebuild <- read.csv('/tmp/step4.csv', sep=',')
+  human.readable.dataset <- AddSelfExplainNames(merged.data, paste(DATA_DIR, 'features.txt', sep='/'))
 
-  result <- arrange(result, SubjectId, ActivityLabelId)
-  write.table(result, '/tmp/step5.csv', sep=',', row.names=FALSE)
+  summ.data <- CreateSummarized(human.readable.dataset)
+
+  write.table(summ.data, '/tmp/step6.csv', sep=',', row.names=FALSE)
+
 
   return(c(0))
 }
