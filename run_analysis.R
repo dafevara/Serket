@@ -138,14 +138,14 @@ GenerateHumanReadableName <- function(not.readable = NULL){
                 "Jerk" = "Jerk",
                 "mean()" = "Mean",
                 "std()" = "StandardDeviation",
-                "meanFreq()" = "MeanFrequency",
+                "meanFreq()" = "MeanFreq",
                 "Mag" = "Magnitude",
                 "-" = '',
                 "-X" = "AtXAxis",
                 "-Y" = "AtYAxis",
                 "-Z" = "AtZAxis",
                 "BodyBody" = "Body",
-                "FrecuencyFrecuency" = "Frecuency"
+                "FrequencyFrequency" = "Frequency"
              )
 
   measure.key <- substr(not.readable, 0,1)
@@ -159,7 +159,7 @@ GenerateHumanReadableName <- function(not.readable = NULL){
     }
 
     if (measure.key == 'f') {
-      not.readable <- paste(not.readable, "Frecuency", sep='')
+      not.readable <- paste(not.readable, "Frequency", sep='')
     }
   }
 
@@ -186,21 +186,17 @@ Serket.run <- function() {
 
   ## Step 2
   extracted.data <- ExtractMeanAndStd(dataset.baseline)
-
   ## Step 3
   activity.data <- ActivityLabels(paste(DATA_DIR, 'activity_labels.txt', sep='/'))
   merged.data <- MergeData(input.data=extracted.data, activity.data=activity.data)
 
-  ##write.table(merged.data, '/tmp/step4.csv', sep=',', row.names=FALSE)
-  #prebuild <- read.csv('/tmp/step4.csv', sep=',')
+  # Step 4
   human.readable.dataset <- AddSelfExplainNames(merged.data, paste(DATA_DIR, 'features.txt', sep='/'))
 
+  # Step 5
   summ.data <- CreateSummarized(human.readable.dataset)
 
-  write.table(summ.data, '/tmp/step6.csv', sep=',', row.names=FALSE)
-
-
-  return(c(0))
+  return(summ.data)
 }
 
 Serket.run()
