@@ -7,12 +7,12 @@ Codebook
 
 ## Study Design
 
-The input data set contains training and test data regarding
+For this study, the input dataset contains training and test data regarding
 Accelerometer and Gyroscope measurements using Samsung Galaxy S devises
-with the help of 30 subject. This data was collected regarding 6
+with the help of 30 subjects. This data was collected regarding 6
 different activities (please see activity_labels.txt file).
 
-The input data is separated in training and test directory, inside both
+The input data is separated in training and test directories. Inside both
 directories there's a `Inertial Signals` directory which is no relevant
 for the purpose of the analysis, because of that it's descarted.
 
@@ -27,35 +27,33 @@ The input data is organized as follows:
   * `UCI HAR Dataset/test/y_test.txt`: Activity Ids.
 
 Due that the input data is splitted into test and training sets, the first
-approach was to understand what measures stores each of them. The
-observations were the same in both sets, meaning, same accelerator and
-gyroscope measurements, however the problems was that activities and
-subject information were safe in separate files.
+approach was to understand what measures are store in each file. In both sets, the
+observations were the same in terms of accelerator and
+gyroscope measurements. However, this separation represents a study obstacle.
 
-In terms of accomplish the tidy data principles, that separation is the right way to share a data set for
+In order to accomplish the tidy data principles, that separation is the right way to share a dataset for
 scientific purpose, but in favor of the current study case, it's need to
-have activity and subject data together with the measures data. To do
+have activity, subject and measures data together. To do
 that, the activity and subject data was clipped for each test and
 training sets as first step.
 
-Once each data set contained the activity and subject data, the
-following step was to bind by rows both sets. The result was a big data
-set with all the needed measures, activities and subject data.
+Once each dataset contains activity and subject data, the
+following step was to bind both datasets by rows. As result, a big dataset
+with all needed measures, activities and subject data was generated.
 
-At that point the dimension were rows: 10299, cols: 563
+At that point, current dataset dimension were rows: 10299, cols: 563
 
 With the data together, the next step was to extract only Mean and
 Standard Deviation Variables. Following the features description in
 features.txt and features_info.txt.
 
-To accomplish that, is used the Method `ExtractMeanAndStd`, the result
-is a dataset with dimmensions: 10299x81
+To accomplish that, the method `ExtractMeanAndStd` is used. As result, dataset dimmensions were 10299x81.
 
-At this point the dataset have an ActivityLabelId, but, it isn't easy to
+At this point, the dataset includes ActivityLabelId column. However, it isn't easy to
 recognize what is the activity or what means the `ActivityLabelId`.
 Because of that, and using the data on the file: `activity_labels.txt`,
 that data was merged into the actual dataset. After that operation
-the actual dataset was the dimmensions 10299x82.
+the actual dataset dimmensions were 10299x82.
 
 At this point, the measure variable names are not easy to read and
 understand, in order to fix that, and using the features_info.txt, the
@@ -87,12 +85,11 @@ but it's descriptive and self-explained.
 
 Once the actual dataset have descriptive variable names, the next and
 final step was to group and summarize the data, to do that the method:
-`CreateSummarized` creates and a separated tidy data set grouping by
+`CreateSummarized` creates a separated tidy dataset grouping by
 SubjectId, ActivityLabelId and ActivityLabel. With that, the summarize
 process was only applied to a measures variables.
 
-As result of this analysis, the tidy data set have the following
-dimmensions:
+As result of this steps, the tidy dataset dimmensions were:
 
 Rows: 180, Cols: 82
 
